@@ -8,12 +8,16 @@
     "npm": "8.5.0"
   },
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "backend": "nodemon index.js"
   },
   "author": "Leandro Lazzaretti",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.3",
     "node": "^17.7.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
   }
 }
