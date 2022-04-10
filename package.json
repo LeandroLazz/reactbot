@@ -14,6 +14,7 @@
   "author": "Leandro Lazzaretti",
   "license": "ISC",
   "dependencies": {
+    "@google-cloud/storage": "^5.19.0",
     "body-parser": "^1.20.0",
     "dialogflow": "^1.2.0",
     "express": "^4.17.3",
