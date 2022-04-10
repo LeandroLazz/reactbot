@@ -1,5 +1,5 @@
 {
-  "name": "reactbot",
+  "name": "chatbot-essential",
   "version": "1.0.0",
   "description": "React bot for webpage",
   "main": "index.js",
@@ -14,6 +14,8 @@
   "author": "Leandro Lazzaretti",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.20.0",
+    "dialogflow": "^1.2.0",
     "express": "^4.17.3",
     "node": "^17.7.2"
   },
