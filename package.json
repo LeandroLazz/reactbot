@@ -8,8 +8,9 @@
     "npm": "8.5.0"
   },
   "scripts": {
-    "start": "node index.js",
-    "backend": "nodemon index.js"
+    "start": "serve -s build",
+    "backend": "nodemon index.js",
+    "heroku-postbuild": "npm run build"
   },
   "author": "Leandro Lazzaretti",
   "license": "ISC",
@@ -19,7 +20,8 @@
     "dialogflow": "^1.2.0",
     "express": "^4.17.3",
     "node": "^17.7.2",
-    "pb-util": "^1.0.3"
+    "pb-util": "^1.0.3",
+    "serve": "^13.0.2"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
