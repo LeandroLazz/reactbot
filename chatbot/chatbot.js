@@ -1,5 +1,5 @@
 'use strict'
-const dialogFlow = require('dialogFlow');
+const dialogFlow = require('dialogflow');
 const structjson = require('./structjson');
 const config = require('../config/keys');
 
