@@ -6,6 +6,12 @@
 //   googlePrivateKey: process.env.GOOGLE_PRIVATE_KEY
 // }
 
+console.log(process.env.GOOGLE_PROJECT_ID);
+console.log(process.env.DIALOGFLOW_SESSION_ID);
+console.log(process.env.DIALOGFLOW_SESSION_LANGUAGE_CODE);
+console.log(process.env.GOOGLE_CLIENT_EMAIL);
+console.log(process.env.GOOGLE_PRIVATE_KEY);
+
 module.exports = {
   googleProjectID: 'reactpageagent-tfpm',
   dialogFlowSessionID: 'react-bot-session',
