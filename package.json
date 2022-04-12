@@ -8,9 +8,8 @@
     "npm": "8.5.0"
   },
   "scripts": {
-    "start": "serve -s build",
-    "backend": "nodemon index.js",
-    "heroku-postbuild": "npm run build"
+    "start": "node index.js",
+    "backend": "nodemon index.js"
   },
   "author": "Leandro Lazzaretti",
   "license": "ISC",
