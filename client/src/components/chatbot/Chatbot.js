@@ -22,7 +22,6 @@ class Chatbot extends Component {
     if (cookies.get('userID') === undefined) {
       cookies.set('userID', uuid(), { path: '/' });
     }
-    console.log(cookies.get('userID'));
   }
 
   async df_text_query(queryText) {
@@ -39,7 +38,6 @@ class Chatbot extends Component {
     const res = await axios.post('/api/df_text_query', {text: queryText, userID: cookies.get('userID')});
 
     for (let msg of res.data.fulfillmentMessages) {
-      console.log(JSON.stringify(msg));
       says = {
         speaks: 'bot',
         msg: msg
@@ -83,7 +81,7 @@ class Chatbot extends Component {
               <a className="btn-floating btn-large waves-effect waves-light red">{message.speaks}</a>
             </div>
             <div style={{ overflow: 'auto', overflowY: 'scroll' }}>
-              <div style={{ height: 300, width: message.msg.payload.fields.cards.listValue.values.length * 270 }}>
+              <div style={{ height: 340, width: message.msg.payload.fields.cards.listValue.values.length * 270 }}>
                 { this.renderCards(message.msg.payload.fields.cards.listValue.values) }
               </div>
             </div>
@@ -112,14 +110,20 @@ class Chatbot extends Component {
 
   render() {
     return (
-      <div style={{ height: 400, width: 400, float: 'right' }}>
-        <div id="chatbot" style={{ height: '100%', width: '100%', overflow: 'auto' }}>
-          <h2>Chatbot</h2>
+      <div style={{ height: 500, width: 400, position: 'absolute', bottom: 0, right: 0, border: '1px solid lightgrey' }}>
+        <nav>
+          <div className="nav-wrapper">
+            <a className="brand-logo">ChatBot</a>
+          </div>
+        </nav>
+        <div id="chatbot" style={{ height: 388, width: '100%', overflow: 'auto' }}>
           {this.renderMessages(this.state.messages)}
           <div ref={(el) => { this.messagesEnd = el; }}
             style={{ float: 'left', clear: 'both' }}>
           </div>
-          <input type="text" onKeyPress={this._handleInputKeyPress} />
+        </div>
+        <div className="col s12">
+          <input style={{ margin: 0, paddingLeft: '1%', paddingRight: '1%', width: '98%'}} placeholder="type a message: " type="text" onKeyPress={this._handleInputKeyPress} />
         </div>
       </div>
     )
