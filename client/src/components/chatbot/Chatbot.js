@@ -72,7 +72,14 @@ class Chatbot extends Component {
     event.preventDefault();
     event.stopPropagation();
 
-    this.df_text_query(text);
+    switch (payload) {
+      case 'training_masterclass':
+        this.df_event_query('MASTERCLASS');
+        break;
+      default:
+        this.df_text_query(text);
+        break;
+    }
   }
 
   renderCards(cards) {
@@ -82,7 +89,11 @@ class Chatbot extends Component {
   renderOneMessage(message, i) {
     if (message.msg && message.msg.text && message.msg.text.text) {
       return <Message key={i} speaks={message.speaks} text={message.msg.text.text} />;
-    } else if(message.msg && message.msg.payload.fields.cards) {
+    } else if(message.msg && 
+      message.msg.payload && 
+      message.msg.payload.fields && 
+      message.msg.payload.fields.cards
+    ) {
       return <div key={i}>
         <div className="card-panel grey lighten-5 z-depth-1">
           <div style={{ overflow: 'hidden' }}>
@@ -112,6 +123,7 @@ class Chatbot extends Component {
   }
 
   renderMessages(stateMessages) {
+    console.log(stateMessages);
     if (stateMessages) {
       return stateMessages.map((message, i) => {
         return this.renderOneMessage(message, i);
