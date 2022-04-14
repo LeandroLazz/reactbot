@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios/index';
+
 import Cookies from 'universal-cookie';
 import { v4 as uuid } from 'uuid';
 
@@ -24,7 +25,8 @@ class Chatbot extends Component {
 
     this.state = {
       messages: [],
-      showBot: true
+      showBot: true,
+      shopWelcomeSent: false
     }
 
     if (cookies.get('userID') === undefined) {
@@ -66,12 +68,26 @@ class Chatbot extends Component {
     }
   }
 
-  componentDidMount() {
+  resolveAfterXSeconds(x) {
+    return new Promise(resolve => {
+      setTimeout(() => {
+          resolve(x);
+      }, x * 1000);
+    })
+  }
+
+  async componentDidMount() {
     this.df_event_query('Welcome');
+
+    if (window.location.pathname === '/shop' && !this.state.shopWelcomeSent) {
+      await this.resolveAfterXSeconds(1);
+      this.df_event_query('WELCOME_SHOP');
+      this.setState({ shopWelcomeSent: true, showBot: true });
+    }
   }
 
   componentDidUpdate() {
-    this.messagesEnd.scrollIntoView({ behaviour: 'smooth'});
+    this.messagesEnd.scrollIntoView({ behaviour: 'auto'});
     if ( this.talkInput ) {
       this.talkInput.focus();
     }
@@ -94,6 +110,9 @@ class Chatbot extends Component {
     event.stopPropagation();
 
     switch (payload) {
+      case 'recommended_yes':
+        this.df_event_query('SHOW_RECOMMENDATIONS');
+        break;
       case 'training_masterclass':
         this.df_event_query('MASTERCLASS');
         break;
