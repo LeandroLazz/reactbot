@@ -8,3 +8,5 @@ const registrationSchema = new Schema({
   email: String,
   registerDate: Date,
 });
+
+mongoose.model('registration', registrationSchema);
