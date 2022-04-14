@@ -95,7 +95,7 @@ class Chatbot extends Component {
         }
       }
       this.setState({ messages: [...this.state.messages, says]});
-      
+
       let that = this;
       setTimeout(function(){
         that.setState({ showBot: false})
@@ -198,7 +198,6 @@ class Chatbot extends Component {
   }
 
   renderMessages(returnedMessages) {
-    console.log(returnedMessages);
     if (returnedMessages) {
       return returnedMessages.map((message, i) => {
         return this.renderOneMessage(message, i);
