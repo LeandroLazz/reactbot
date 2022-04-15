@@ -141,8 +141,8 @@ class Chatbot extends Component {
       };
 
       const res = await axios.post(
-        'https://dialogflow.googleapis.com/v2/projects/' + process.env.REACT_APP_GOOGLE_PROJECT_ID +
-        '/agent/sessions/' + process.env.REACT_APP_DIALOGFLOW_SESSION_ID + cookies.get('userID') + ':detectIntent',
+        'https://dialogflow.googleapis.com/v2/projects/reactpageagent-tfpm' +
+        '/agent/sessions/react-bot-session' + cookies.get('userID') + ':detectIntent',
         request,
         config
       );
