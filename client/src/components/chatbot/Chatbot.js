@@ -231,7 +231,7 @@ class Chatbot extends Component {
   }
 
   renderCards(cards) {
-    return cards.map((card, i) => <Card key={i} payload={card.structValue} />);
+    return cards.map((card, i) => <Card key={i} payload={card} />);
   }
 
   renderOneMessage(message, i) {
@@ -239,8 +239,7 @@ class Chatbot extends Component {
       return <Message key={i} speaks={message.speaks} text={message.msg.text.text} />;
     } else if(message.msg && 
       message.msg.payload && 
-      message.msg.payload.fields && 
-      message.msg.payload.fields.cards
+      message.msg.payload.cards
     ) {
       return <div key={i}>
         <div className="card-panel grey lighten-5 z-depth-1">
@@ -249,8 +248,8 @@ class Chatbot extends Component {
               <a className="btn-floating btn-large waves-effect waves-light red">{message.speaks}</a>
             </div>
             <div style={{ overflow: 'auto', overflowY: 'scroll' }}>
-              <div style={{ height: 340, width: message.msg.payload.fields.cards.listValue.values.length * 270 }}>
-                { this.renderCards(message.msg.payload.fields.cards.listValue.values) }
+              <div style={{ height: 340, width: message.msg.payload.cards.length * 270 }}>
+                { this.renderCards(message.msg.payload.cards) }
               </div>
             </div>
           </div>
@@ -258,15 +257,14 @@ class Chatbot extends Component {
       </div>
     } else if (message.msg && 
       message.msg.payload && 
-      message.msg.payload.fields && 
-      message.msg.payload.fields.quick_replies
+      message.msg.payload.quick_replies
     ) {
       return <QuickReplies 
-        text={message.msg.payload.fields.text ? message.msg.payload.fields.text : null} 
+        text={message.msg.payload.text ? message.msg.payload.text : null} 
         key={i} 
         replyClick={this._handleQuickReplyPayload} 
         speaks={message.speaks} 
-        payload={message.msg.payload.fields.quick_replies.listValue.values}/>;
+        payload={message.msg.payload.quick_replies}/>;
     }
   }
 
