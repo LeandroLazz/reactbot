@@ -8,4 +8,5 @@ In this project React, Node, Express and MongoDb were used
 Google DialogFlow API was used
 
 # Heroku Link
-The project is on heroku: [chatbot-essential](https://chatbot-essential.herokuapp.com/).
+The project is on Heroku.\
+Click this link to test the app: [chatbot-essential](https://chatbot-essential.herokuapp.com/).
