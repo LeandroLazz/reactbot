@@ -26,7 +26,9 @@ class Chatbot extends Component {
     this.state = {
       messages: [],
       showBot: true,
-      shopWelcomeSent: false
+      shopWelcomeSent: false,
+      clientToken: false,
+      regenerateToken: 0
     }
 
     if (cookies.get('userID') === undefined) {
@@ -126,23 +128,21 @@ class Chatbot extends Component {
 
   async df_client_call (request) {
     try {
-      if (process.env.REACT_APP_DIALOGFLOW_CLIENT_KEY === undefined
-        || process.env.REACT_APP_GOOGLE_PROJECT_ID === undefined
-        || process.env.REACT_APP_DF_SESSION_ID === undefined) {
-        console.log('cant read from env variable');
-        throw Error;
+      if (this.state.clientToken === false) {
+        const res = await axios.get('/api/get_client_token');
+        this.setState({clientToken: res.data.token});
       }
 
       var config = {
         headers: {
-          'Authorization': "Bearer " + process.env.REACT_APP_DIALOGFLOW_CLIENT_KEY,
+          'Authorization': "Bearer " + this.state.clientToken,
           'Content-Type': 'application/json; charset=utf-8'
         }
       };
 
       const res = await axios.post(
         'https://dialogflow.googleapis.com/v2/projects/' + process.env.REACT_APP_GOOGLE_PROJECT_ID +
-        '/agent/sessions/' + process.env.REACT_APP_DF_SESSION_ID + cookies.get('userID') + ':detectIntent',
+        '/agent/sessions/' + process.env.REACT_APP_DIALOGFLOW_SESSION_ID + cookies.get('userID') + ':detectIntent',
         request,
         config
       );
@@ -158,21 +158,29 @@ class Chatbot extends Component {
           this.setState({ messages: [...this.state.messages, says]});
         }
       }
+
+      this.setState({ regenerateToken: 0});
+
     } catch (e) {
-      let says = {
-        speaks: 'bot',
-        msg: {
-          text : {
-            text: "I'm having troubles. I need to terminate. will be back later"}
+      if (e.response.status === 401 && this.state.regenerateToken < 1) {
+        this.setState({ clientToken: false, regenerateToken: 1 });
+        this.df_client_call(request);
+      } else {
+        let says = {
+          speaks: 'bot',
+          msg: {
+            text : {
+              text: "I'm having troubles. I need to terminate. will be back later"}
+          }
         }
+        this.setState({ messages: [...this.state.messages, says]});
+
+        let that = this;
+
+        setTimeout(function(){
+            that.setState({ showBot: false})
+        }, 2000);
       }
-      this.setState({ messages: [...this.state.messages, says]});
-
-      let that = this;
-
-      setTimeout(function(){
-        that.setState({ showBot: false})
-      }, 2000);
     }
   }
 
