@@ -318,7 +318,7 @@ class Chatbot extends Component {
       );
     } else {
       return (
-        <div style={{ minHeight: 40, maxHeight: 470, width:400, position: 'absolute', bottom: 0, right: 0, border: '1px solid lightgray'}}>
+        <div style={{ minHeight: 40, maxHeight: 470, width:400, position: 'absolute', bottom: 0, right: 20, border: '1px solid lightgray'}}>
           <nav>
             <div className="nav-wrapper blue darken-3" style={{ paddingLeft: '20px'}}>
               <a href="#" className="brand-logo">ChatBot</a>
