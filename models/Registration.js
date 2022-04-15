@@ -6,7 +6,7 @@ const registrationSchema = new Schema({
   address: String,
   phone: String,
   email: String,
-  registerDate: Date,
+  dateSent: Date,
 });
 
 mongoose.model('registration', registrationSchema);
