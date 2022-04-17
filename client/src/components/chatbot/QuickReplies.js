@@ -27,15 +27,17 @@ class QuickReplies extends Component {
 
   render() {
     return (
-      <div className="col s12 m8 offset-m2 l6 offset-l3">
-        <div className="card-panel grey lighten-4 z-depth-1">
-          <div className="row valign-wrapper">
-            <div className="col s2">
-              <a href="/" className="btn-floating btn-large waves-effect waves-light teal accent-4">
-                { this.props.speaks }
-              </a>
-            </div>
-            <div id="quick-replies" className="col s10">
+      <div className="row m8 offset-m2 l6 offset-l3 valign-wrapper">
+        <div className="col s3">
+          <a href="/" className="btn-floating btn-large waves-effect waves-light grey darken-1">
+            { this.props.speaks }
+          </a>
+        </div>
+        <div className="col s9">
+          <div className="card-panel blue-grey lighten-5 left-align z-depth-1 valign-wrapper"
+            style={{ padding: '10px 20px', wordBreak: 'break-word', borderRadius: '25px' }}
+          >
+            <div id="quick-replies">
               { this.props.text && <p>
                 { this.props.text }
               </p>

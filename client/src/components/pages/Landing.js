@@ -1,9 +1,11 @@
 import React from 'react';
 
 const Landing = () => (
-  <div style={{ textAlign: 'left' }}>
-    <h4>with the help of the chatbot</h4>
-    <h5>try some of the messages below:</h5>
+  <div className="col s12 grey lighten-3 z-depth-2" 
+    style={{ textAlign: 'left', borderRadius: '10px', padding: '40px', marginTop: '20px' }}
+  >
+    <h4>With the help of the chatbot</h4>
+    <h5>Try some of the messages below:</h5>
     <p>
       - hi<br/>
       - Can you recommend a course?<br/>

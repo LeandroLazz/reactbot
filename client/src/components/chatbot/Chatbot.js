@@ -296,16 +296,16 @@ class Chatbot extends Component {
   render() {
     if (this.state.showBot) {
       return (
-        <div style={{ minHeight: 500, maxHeight: 470, width: 400, position: 'absolute', bottom: 0, right: 20, border: '1px solid lightgrey'}}>
+        <div className="z-depth-4" style={{ minHeight: 500, maxHeight: 470, width: 400, position: 'absolute', bottom: 0, right: 20, borderTopRightRadius: '20px', borderTopLeftRadius: '20px', overflow: 'hidden' }}>
           <nav>
-            <div className="nav-wrapper blue darken-3" style={{ paddingLeft: '20px'}}>
-              <a href="#" className="brand-logo">ChatBot</a>
-              <ul id="nav-mobile" className="right hide-on-med-and-down">
+            <div className="nav-wrapper light-blue accent-4" style={{ paddingLeft: '20px'}}>
+              <a href="#" className="brand-logo" style={{ fontSize: '1.3rem' }}>ChatBot Support</a>
+              <ul id="nav-mobile" className="right">
                 <li><a href="#" onClick={this.hide}>Close</a></li>
               </ul>
             </div>
           </nav>
-          <div id="chatbot" style={{ height: 388, width: '100%', overflow: 'auto', padding: '10px'}}>
+          <div id="chatbot" className="grey lighten-4" style={{ height: 388, width: '100%', overflow: 'auto', padding: '10px 30px'}}>
             {this.renderMessages(this.state.messages)}
             <div ref={(el) => { this.messagesEnd = el; }}
               style={{ float: 'left', clear: 'both' }}>
@@ -318,11 +318,11 @@ class Chatbot extends Component {
       );
     } else {
       return (
-        <div style={{ minHeight: 40, maxHeight: 470, width:400, position: 'absolute', bottom: 0, right: 20, border: '1px solid lightgray'}}>
+        <div className="z-depth-4" style={{ minHeight: 40, maxHeight: 470, width:400, position: 'absolute', bottom: 0, right: 20, borderTopRightRadius: '20px', borderTopLeftRadius: '20px', overflow: 'hidden' }}>
           <nav>
-            <div className="nav-wrapper blue darken-3" style={{ paddingLeft: '20px'}}>
-              <a href="#" className="brand-logo">ChatBot</a>
-              <ul id="nav-mobile" className="right hide-on-med-and-down">
+            <div className="nav-wrapper light-blue accent-4" style={{ paddingLeft: '20px'}}>
+              <a href="#" className="brand-logo" style={{ fontSize: '1.3rem' }}>ChatBot Support</a>
+              <ul id="nav-mobile" className="right">
                 <li><a href="#" onClick={this.show}>Show</a></li>
               </ul>
             </div>

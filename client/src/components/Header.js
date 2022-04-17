@@ -1,11 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 const Header = () => (
-  <nav>
-    <div className="nav-wrapper blue darken-3 center-align">
-        Simple ChatBot
-      <ul id="nav-mobile" className="right hide-on-med-and-down"></ul>
+  <nav style={{ borderBottomRightRadius: '10px', borderBottomLeftRadius: '10px', overflow: 'hidden' }}>
+    <div className="nav-wrapper light-blue accent-4 center-align">
+      Simple ChatBot
     </div>
   </nav>
 )
