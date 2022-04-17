@@ -57,34 +57,6 @@ class Chatbot extends Component {
     };
 
     await this.df_client_call(request);
-
-    // try {
-    //   const res = await axios.post('/api/df_text_query', {text: text, userID: cookies.get('userID')});
-
-    //   for (let msg of res.data.fulfillmentMessages) {
-    //     says = {
-    //       speaks: 'bot',
-    //       msg: msg
-    //     }
-    //     this.setState({ messages: [...this.state.messages, says] });
-    //   }
-    // } catch (e) {
-    //   says = {
-    //     speaks: 'bot',
-    //     msg: {
-    //       text : {
-    //         text: "I'm having troubles. I need to terminate. will be back later"
-    //       }
-    //     }
-    //   }
-    //   this.setState({ messages: [...this.state.messages, says]});
-
-    //   let that = this;
-
-    //   setTimeout(function(){
-    //     that.setState({ showBot: false})
-    //   }, 2000);
-    // }
   }
 
   async df_event_query(event) {
@@ -98,32 +70,6 @@ class Chatbot extends Component {
     };
 
     await this.df_client_call(request);
-    // try {
-    //   const res = await axios.post('/api/df_event_query', {event: event, userID: cookies.get('userID')});
-
-    //   for (let msg of res.data.fulfillmentMessages) {
-    //     let says = {
-    //       speaks: 'bot',
-    //       msg: msg
-    //     };
-    //     this.setState({ messages: [...this.state.messages, says] });
-    //   }
-    // } catch (e) {
-    //   let says = {
-    //     speaks: 'bot',
-    //     msg: {
-    //       text : {
-    //         text: "I'm having troubles. I need to terminate. will be back later"
-    //       }
-    //     }
-    //   }
-    //   this.setState({ messages: [...this.state.messages, says]});
-
-    //   let that = this;
-    //   setTimeout(function(){
-    //     that.setState({ showBot: false})
-    //   }, 2000);
-    // }
   }
 
   async df_client_call (request) {
