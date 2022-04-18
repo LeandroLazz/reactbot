@@ -72,7 +72,7 @@ class Chatbot extends Component {
     await this.df_client_call(request);
   }
 
-  async df_client_call (request) {
+  async df_client_call(request) {
     try {
       if (this.state.clientToken === false) {
         const res = await axios.get('/api/get_client_token');
@@ -93,16 +93,15 @@ class Chatbot extends Component {
         config
       );
 
-      let  says = {};
-
       if (res.data.queryResult.fulfillmentMessages ) {
-        for (let msg of res.data.queryResult.fulfillmentMessages) {
-          says = {
+        const saysArray = res.data.queryResult.fulfillmentMessages.map(msg => {
+          return {
             speaks: 'bot',
             msg: msg
           }
-          this.setState({ messages: [...this.state.messages, says]});
-        }
+        })
+
+        this.setState({messages: [...this.state.messages, ...saysArray] })
       }
 
       this.setState({ regenerateToken: 0});
@@ -119,6 +118,7 @@ class Chatbot extends Component {
               text: "I'm having troubles. I need to terminate. will be back later"}
           }
         }
+        
         this.setState({ messages: [...this.state.messages, says]});
 
         let that = this;
@@ -196,15 +196,10 @@ class Chatbot extends Component {
       message.msg.payload.cards
     ) {
       return <div key={i}>
-        <div className="card-panel grey lighten-5 z-depth-1">
-          <div style={{ overflow: 'hidden' }}>
-            <div className="col s2">
-              <a className="btn-floating btn-large waves-effect waves-light red">{message.speaks}</a>
-            </div>
-            <div style={{ overflow: 'auto', overflowY: 'scroll' }}>
-              <div style={{ height: 340, width: message.msg.payload.cards.length * 270 }}>
-                { this.renderCards(message.msg.payload.cards) }
-              </div>
+        <div style={{ overflow: 'hidden' }}>
+          <div style={{ overflow: 'auto', overflowY: 'scroll' }}>
+            <div style={{ height: 340, width: message.msg.payload.cards.length * 270 }}>
+              { this.renderCards(message.msg.payload.cards) }
             </div>
           </div>
         </div>
@@ -242,7 +237,7 @@ class Chatbot extends Component {
   render() {
     if (this.state.showBot) {
       return (
-        <div className="z-depth-4" style={{ minHeight: 500, maxHeight: 470, width: 400, position: 'absolute', bottom: 0, right: 20, borderTopRightRadius: '20px', borderTopLeftRadius: '20px', overflow: 'hidden' }}>
+        <div className="z-depth-4" style={{ minHeight: 500, maxHeight: 600, width: 400, position: 'absolute', bottom: 0, right: 20, borderTopRightRadius: '20px', borderTopLeftRadius: '20px', overflow: 'hidden' }}>
           <nav>
             <div className="nav-wrapper light-blue accent-4" style={{ paddingLeft: '20px'}}>
               <a href="#" className="brand-logo" style={{ fontSize: '1.3rem' }}>ChatBot Support</a>
@@ -251,7 +246,7 @@ class Chatbot extends Component {
               </ul>
             </div>
           </nav>
-          <div id="chatbot" className="grey lighten-4" style={{ height: 388, width: '100%', overflow: 'auto', padding: '10px 30px'}}>
+          <div id="chatbot" className="grey lighten-4" style={{ height: 480, width: '100%', overflow: 'auto', padding: '10px 30px'}}>
             {this.renderMessages(this.state.messages)}
             <div ref={(el) => { this.messagesEnd = el; }}
               style={{ float: 'left', clear: 'both' }}>
@@ -264,7 +259,7 @@ class Chatbot extends Component {
       );
     } else {
       return (
-        <div className="z-depth-4" style={{ minHeight: 40, maxHeight: 470, width:400, position: 'absolute', bottom: 0, right: 20, borderTopRightRadius: '20px', borderTopLeftRadius: '20px', overflow: 'hidden' }}>
+        <div className="z-depth-4" style={{ minHeight: 40, maxHeight: 600, width:400, position: 'absolute', bottom: 0, right: 20, borderTopRightRadius: '20px', borderTopLeftRadius: '20px', overflow: 'hidden' }}>
           <nav>
             <div className="nav-wrapper light-blue accent-4" style={{ paddingLeft: '20px'}}>
               <a href="#" className="brand-logo" style={{ fontSize: '1.3rem' }}>ChatBot Support</a>
